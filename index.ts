@@ -40,6 +40,7 @@ const Command = (name: string, msg: Message, execute: MsgFunction) => {
     return /* new es para inicializar una nueva clase*/ new CommandB(name, msg, execute)
 }
 
+// Evento para las interacciones
 client.on("interactionCreate", async (interaction) => {
     if(!interaction.isCommand()) return;
 
@@ -72,8 +73,7 @@ client.on("messageCreate", async (message) => {
     if(message.guild === null) return;
     // Usamos la función Command para crear un comando.
     Command("ping", message, (msg) => {
-        // Realmente el msg no es necesario, pero lo dejo para que aprendas a usar este tipo de funciones
-        msg.reply(`Your ping is **${client.ws.ping}ms**`) // Usamos el método reply para enviar  una respuesta, client.ws.ping representa los ms
+        msg.reply(`Your ping is **${client.ws.ping}ms**`) // Usamos el método reply para enviar  una respuesta, client.ws.ping representa los ms.
         console.log(`Pong! ${client.ws.ping}`) // Mandamos un mensaje a la consola.
     }).executeCommand()
     Command("hola", message, (msg) => {
@@ -90,10 +90,8 @@ client.on("messageCreate", async (message) => {
         msg.reply({ embeds: [embed] })
         console.log("Comando ejecutado")
     }).executeCommand()
-    // Hoy aprenderemos sobre el comando de ayuda y modals
     Command("ayuda", message, (msg) => {
         const commands = ["ping", "hola", "ayuda"].map(x => `\`${x}\``).join(", ")
         msg.reply(`Los comandos son: ${commands}`)
     }).executeCommand()
 }) 
-// 
